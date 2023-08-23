@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('entry_time');
             $table->string('duration');
             $table->string('arrival_destination');
+            $table->string("slug", 150);
             $table->timestamps();
         });
     }

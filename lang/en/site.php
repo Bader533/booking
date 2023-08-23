@@ -47,4 +47,44 @@ return [
     'duration' => 'Duration',
     'arrival_destination' => 'Arrival Destination',
 
+    'actions' => 'Actions',
+
+    'login' => 'Login',
+    'logout' => 'Log Out',
+
+    'all_clients' => 'All Clients',
+    'add_new_client' => 'Add New Client',
+    'search_client' => 'Search Client',
+
+    'no_data_found' => 'No Data Found',
+
+
+    'lounge' => 'Lounge',
+    'all_lounges' => 'All Lounge',
+    'add_new_lounge' => 'Add New Lounge',
+    'search_lounge' => 'Search Lounge',
+    'name' => 'Name',
+    'city' => 'City',
+    'address' => 'Address',
+    'night' => 'Night',
+    'night_price' => 'Night Price',
+    'description' => 'Description',
+    'images' => 'Images',
+    'lounge_details' => 'Lounge Details',
+
+    'booking' => 'Booking',
+    'booking_details' => 'Booking Details',
+    'count_night' => 'Count Night',
+    'price' => 'Price',
+    'pay_way' => 'Pay Way',
+    'search_booking' => 'Search Booking',
+    'all_booking' => 'All Bookings',
+    'add_new_booking' => 'Add New Booking',
+    'created_at' => 'Created At',
+    'paid_from_website' => 'Paid From Website',
+    'bank_transfer' => 'Bank Transfer',
+
+    'dashboard' => 'Dashboard',
+
+    'duration_of_stay' => 'Duration Of Stay',
 ];

@@ -46,4 +46,45 @@ return [
     'entry_time' => 'وقت الدخول',
     'duration' => 'المدة',
     'arrival_destination' => 'جهة القدوم',
+    'actions' => 'اعدادات',
+
+    'login' => 'تسجيل الدخول',
+    'logout' => 'تسجيل خروج',
+
+    'all_clients' => 'كل العملاء',
+    'add_new_client' => 'اضافة عميل جديد',
+    'search_client' => 'البحث عن العملاء',
+
+    'no_data_found' => 'لا يوجد بيانات',
+
+    'lounge' => 'استراحة',
+    'all_lounges' => 'كل الاستراحات',
+    'add_new_lounge' => 'اضافة استراحة جديدة',
+    'search_lounge' => 'البحث عن الاستراحة',
+    'name' => 'الاسم',
+    'city' => 'المدينة',
+    'address' => 'العنوان',
+    'night' => 'الليلة',
+    'night_price' => 'سعر الليلة',
+    'description' => 'وصف',
+    'images' => 'صور',
+    'lounge_details' => 'تفاصيل الاستراحة',
+
+    'booking' => 'الحجز',
+    'booking_details' => 'تفاصيل الحجز',
+    'count_night' => 'عدد الليالى',
+    'price' => 'السعر',
+    'pay_way' => 'طريقة الدفع',
+    'search_booking' => 'البحث عن الحجوزات',
+    'all_booking' => 'كل الحجوزات',
+    'add_new_booking' => 'اضافة حجز جديد',
+    'created_at' => 'تاريخ الانشاء',
+
+    'paid_from_website' => 'دفع من الموقع',
+    'bank_transfer' => 'تحويلة بنك',
+
+    'dashboard' => 'الرئيسية',
+
+    'duration_of_stay' => 'مدة الإقامة',
+
 ];

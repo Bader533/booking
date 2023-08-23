@@ -1,38 +1,38 @@
-@if (!$clients->isEmpty())
-@foreach ($clients as $client)
+@if (!$lounges->isEmpty())
+@foreach ($lounges as $lounge)
 <tr>
     <!--begin::First Name=-->
     <td>
-        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$client->f_name}}</a>
+        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$lounge->name}}</a>
     </td>
     <!--end::First Name=-->
 
     <!--begin::Family Name=-->
     <td>
-        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$client->l_name}}</a>
+        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$lounge->city}}</a>
     </td>
     <!--end::Family Name=-->
 
     <!--begin::phone=-->
     <td>
-        <a href="#" class="text-gray-600 text-hover-primary mb-1">{{$client->phone}}</a>
+        <a href="#" class="text-gray-600 text-hover-primary mb-1">{{$lounge->address}}</a>
     </td>
     <!--end::phone=-->
 
     <!--begin::nationality=-->
-    <td>{{$client->nationality}}</td>
+    <td>{{$lounge->night}}</td>
     <!--end::nationality=-->
 
     <!--begin::visa_number=-->
     <td>
-        {{$client->visa_number}}
+        {{$lounge->night_price}}
     </td>
     <!--end::visa_number=-->
 
     <!--begin::Action=-->
     <td class="text-end">
         <!--begin::Edit-->
-        <a href="{{route('client.edit',$client->slug)}}"
+        <a href="{{route('lounge.edit',$lounge->slug)}}"
             class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-target="#kt_modal_update_address">
             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="{{__('site.edit')}}">
                 <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->

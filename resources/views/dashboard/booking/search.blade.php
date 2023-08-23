@@ -1,38 +1,49 @@
-@if (!$clients->isEmpty())
-@foreach ($clients as $client)
+@if (!$bookings->isEmpty())
+@foreach ($bookings as $booking)
 <tr>
     <!--begin::First Name=-->
     <td>
-        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$client->f_name}}</a>
+        <a href="#" class="text-gray-800 text-hover-primary mb-1">
+            {{$booking->client->f_name .' '.$booking->client->l_name}}</a>
     </td>
     <!--end::First Name=-->
 
     <!--begin::Family Name=-->
     <td>
-        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$client->l_name}}</a>
+        <a href="#" class="text-gray-800 text-hover-primary mb-1">{{$booking->lounge->name}}</a>
     </td>
     <!--end::Family Name=-->
 
-    <!--begin::phone=-->
+    <!--begin::pay way=-->
     <td>
-        <a href="#" class="text-gray-600 text-hover-primary mb-1">{{$client->phone}}</a>
+        @if ($booking->pay_way == 1)
+        <span class="badge py-3 px-4 fs-7 badge-light-primary">{{__('site.paid_from_website')}}</span>
+        @else
+        <span class="badge py-3 px-4 fs-7 badge-light-warning">{{__('site.bank_transfer')}}</span>
+        @endif
     </td>
-    <!--end::phone=-->
+    <!--end::pay way=-->
 
-    <!--begin::nationality=-->
-    <td>{{$client->nationality}}</td>
-    <!--end::nationality=-->
-
-    <!--begin::visa_number=-->
+    <!--begin::count_night=-->
     <td>
-        {{$client->visa_number}}
+        <a href="#" class="text-gray-600 text-hover-primary mb-1">{{$booking->count_night}}</a>
     </td>
-    <!--end::visa_number=-->
+    <!--end::count_night=-->
+
+    <!--begin::price=-->
+    <td>{{$booking->price}}</td>
+    <!--end::price=-->
+
+    <!--begin::created_at=-->
+    <td>
+        {{$booking->created_at->format('n/j/Y')}}
+    </td>
+    <!--end::created_at=-->
 
     <!--begin::Action=-->
     <td class="text-end">
         <!--begin::Edit-->
-        <a href="{{route('client.edit',$client->slug)}}"
+        <a href="{{route('booking.edit',$booking->id)}}"
             class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-target="#kt_modal_update_address">
             <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="{{__('site.edit')}}">
                 <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
@@ -56,6 +67,6 @@
 @endforeach
 @else
 <tr>
-    <td colspan="6" align="center">{{__('site.no_data_found')}}</td>
+    <td colspan="7" align="center">{{__('site.no_data_found')}}</td>
 </tr>
 @endif

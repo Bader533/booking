@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Lounge;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoungeController extends Controller
 {
@@ -12,7 +15,8 @@ class LoungeController extends Controller
      */
     public function index()
     {
-        //
+        $lounges = Lounge::paginate(10);
+        return view('dashboard.lounge.index', ['lounges' => $lounges]);
     }
 
     /**
@@ -20,7 +24,7 @@ class LoungeController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.Lounge.create');
     }
 
     /**
@@ -28,7 +32,27 @@ class LoungeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator($request->all(), [
+            'name' => 'required | string | min:3 | max:40',
+            'city' => 'required | string | min:3 | max:40',
+            'address' => 'required | string | min:3 | max:40',
+            'description' => 'required',
+            'night' => 'required | numeric',
+            'night_price' => 'required | numeric',
+            'images' => 'required',
+        ]);
+
+        if (!$validator->fails()) {
+            $lounge = Lounge::create($request->except('images'));
+            if ($lounge && $request->images != null) {
+                foreach ($request->images as $image) {
+                    saveNewImage($image, 'images/lounge', $lounge);
+                }
+            }
+            return response()->json(['message' => $lounge ? __('site.saved_successfully') : __('site.failed_to_save')], $lounge ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+        } else {
+            return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**
@@ -42,17 +66,51 @@ class LoungeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Lounge $lounge)
+    public function edit($slug)
     {
-        //
+        $lounge = Lounge::where('slug', $slug)->first();
+
+        if ($lounge == null) {
+            return view('error-404');
+        }
+
+        return view('dashboard.lounge.edit', ['lounge' => $lounge]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Lounge $lounge)
+    public function update(Request $request, $slug)
     {
-        //
+        $validator = Validator($request->all(), [
+            'name' => 'required | string | min:3 | max:40',
+            'city' => 'required | string | min:3 | max:40',
+            'address' => 'required | string | min:3 | max:40',
+            'description' => 'required',
+            'night' => 'required | numeric',
+            'night_price' => 'required | numeric',
+            'images' => 'required',
+        ]);
+
+        if (!$validator->fails()) {
+            $lounge = Lounge::where('slug', $slug)->first();
+
+            if ($lounge == null) {
+                return view('error-404');
+            }
+
+            $lounge->update($request->except('images'));
+
+            if ($lounge && $request->images != null) {
+                foreach ($request->images as $image) {
+                    saveNewImage($image, 'images/lounge', $lounge);
+                }
+            }
+
+            return response()->json(['message' => $lounge ? __('site.updated_successfully') : __('site.failed_to_update')], $lounge ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+        } else {
+            return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**
@@ -61,5 +119,30 @@ class LoungeController extends Controller
     public function destroy(Lounge $lounge)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('search');
+        $lounges = Lounge::where('name', 'like', '%' . $query . '%')
+            ->orWhere('city', 'like', '%' . $query . '%')
+            ->orWhere('address', 'like', '%' . $query . '%')
+            ->orWhere('night', 'like', '%' . $query . '%')
+            ->orWhere('night_price', 'like', '%' . $query . '%')
+            ->orderBy('id', 'desc')->get();
+        return view('dashboard.lounge.search', ['lounges' => $lounges]);
+    }
+
+    public function deleteImage($id)
+    {
+        $image = Image::where('id', $id)->first();
+        if (File::exists($image->url)) {
+            File::delete($image->url);
+        }
+        $isDeleted = $image->delete();
+        return response()->json(
+            ['message' => $isDeleted ? __('site.deleted_successfully') : __('site.failed_to_delete')],
+            $isDeleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
+        );
     }
 }
