@@ -66,6 +66,7 @@ return [
     'address' => 'العنوان',
     'night' => 'الليلة',
     'night_price' => 'سعر الليلة',
+    'short_description' => 'وصف قصير',
     'description' => 'وصف',
     'images' => 'صور',
     'lounge_details' => 'تفاصيل الاستراحة',
@@ -86,5 +87,13 @@ return [
     'dashboard' => 'الرئيسية',
 
     'duration_of_stay' => 'مدة الإقامة',
+
+    'language' => 'لغة',
+    'arabic' => 'العربية',
+    'english' => 'الانجليزية',
+
+    'search' => 'بحث',
+
+    'find_your_next_stay' => 'ابحث عن إقامتك التالية',
 
 ];

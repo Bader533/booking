@@ -114,10 +114,10 @@
                         <div class="card-body pt-0">
                             <!--begin::night-->
                             <!--begin::Label-->
-                            <label class="required form-label">{{ __('site.night') }}</label>
+                            {{-- <label class="required form-label">{{ __('site.night') }}</label> --}}
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input name="night" id="night" value="{{ $lounge->night }}" class="form-control mb-2" />
+                            {{-- <input name="night" id="night" value="{{ $lounge->night }}" class="form-control mb-2" /> --}}
                             <!--end::Input-->
                             <!--end::night-->
 
@@ -197,6 +197,19 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div>
+                                            <div class="card-body pt-0">
+                                                <div>
+                                                    <!--begin::Label-->
+                                                    <label class="form-label">{{ __('site.short_description') }}</label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Editor-->
+                                                    <input type="text" name="short_description" id="short_description"
+                                                        class="form-control mb-2"
+                                                        value="{{ $lounge->short_description }}" />
+
+                                                    <!--end::Editor-->
+                                                </div>
+                                            </div>
                                             <!--begin::Label-->
                                             <label class="form-label">{{ __('site.description') }}</label>
                                             <!--end::Label-->
@@ -348,8 +361,9 @@
             formData.append('name', document.getElementById('name').value);
             formData.append('city', document.getElementById('city').value);
             formData.append('address', document.getElementById('address').value);
-            formData.append('night', document.getElementById('night').value);
+            formData.append('night', 1);
             formData.append('night_price', document.getElementById('night_price').value);
+            formData.append('short_description', document.getElementById('short_description').value);
 
             var description = document.querySelector('#description .ql-editor').innerHTML;
 

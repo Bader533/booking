@@ -14,6 +14,7 @@ class Lounge extends Model
         'name',
         'city',
         'address',
+        'short_description',
         'description',
         'night',
         'night_price',

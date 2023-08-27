@@ -92,9 +92,11 @@ class ClientController extends Controller
             'phone' => 'required | numeric',
             'nationality' => 'required | string | min:3 | max:40',
             'client_kind' => 'required | string | min:3 | max:40',
+
             'id_kind' => 'required | string | min:3 | max:40',
             'id_copy' => 'required | string | min:3 | max:40',
             'visa_number' => 'required | numeric',
+
             'sign_in' => 'required | date',
             'entry_time' => 'required',
             'duration' => 'required | numeric',
@@ -134,6 +136,7 @@ class ClientController extends Controller
             ->orWhere('nationality', 'like', '%' . $query . '%')
             ->orWhere('visa_number', 'like', '%' . $query . '%')
             ->orderBy('id', 'desc')->get();
+
         return view('dashboard.clients.search', ['clients' => $clients]);
     }
 }

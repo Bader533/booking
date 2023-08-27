@@ -52,7 +52,7 @@
             <!--begin::Form-->
             <form id="client-form" class="form d-flex flex-column flex-lg-row">
                 <!--begin::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+                {{-- <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
                     <!--begin::count_night , price-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -87,7 +87,7 @@
 
                     </div>
                     <!--end::count_night , price-->
-                </div>
+                </div> --}}
                 <!--end::Aside column-->
                 <!--begin::Main column-->
                 <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
@@ -215,8 +215,8 @@
 
         function update() {
             axios.put('/booking/{{ $booking->id }}', {
-                    count_night: document.getElementById('count_night').value,
-                    price: document.getElementById('price').value,
+                    // count_night: document.getElementById('count_night').value,
+                    // price: document.getElementById('price').value,
                     pay_way: document.getElementById('pay_way').value,
                     client_id: document.getElementById('client_id').value,
                     lounge_id: document.getElementById('lounge_id').value,

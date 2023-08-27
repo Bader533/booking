@@ -36,8 +36,8 @@
                             style="background-image:url('assets/media/svg/shapes/top-green.png" data-bs-theme="light">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column text-white pt-15">
-                                <span class="fw-bold fs-2x mb-3">My Tasks</span>
-                                <div class="fs-4 text-white">
+                                <span class="fw-bold fs-2x mb-3">{{ __('site.dashboard') }}</span>
+                                {{-- <div class="fs-4 text-white">
                                     <span class="opacity-75">You have</span>
                                     <span class="position-relative d-inline-block">
                                         <a href="../../demo1/dist/pages/user-profile/projects.html"
@@ -48,7 +48,7 @@
                                         <!--end::Separator-->
                                     </span>
                                     <span class="opacity-75">to comlete</span>
-                                </div>
+                                </div> --}}
                             </h3>
                             <!--end::Title-->
                             <!--begin::Toolbar-->
@@ -85,57 +85,24 @@
                                     <!--end::Menu separator-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3">New Ticket</a>
+                                        <a href="{{ route('booking.create') }}"
+                                            class="menu-link px-3">{{ __('site.add_new_booking') }}</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3">New Customer</a>
+                                        <a href="{{ route('client.create') }}"
+                                            class="menu-link px-3">{{ __('site.add_new_client') }}</a>
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
-                                    <div class="menu-item px-3" data-kt-menu-trigger="hover"
-                                        data-kt-menu-placement="right-start">
+                                    <div class="menu-item px-3">
                                         <!--begin::Menu item-->
-                                        <a href="#" class="menu-link px-3">
-                                            <span class="menu-title">New Group</span>
-                                            <span class="menu-arrow"></span>
+                                        <a href="{{ route('lounge.create') }}" class="menu-link px-3">
+                                            {{ __('site.add_new_lounge') }}
+
                                         </a>
                                         <!--end::Menu item-->
-                                        <!--begin::Menu sub-->
-                                        <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3">Admin Group</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3">Staff Group</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3">Member Group</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu sub-->
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3">New Contact</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu separator-->
-                                    <div class="separator mt-3 opacity-75"></div>
-                                    <!--end::Menu separator-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <div class="menu-content px-3 py-3">
-                                            <a class="btn btn-primary btn-sm px-4" href="#">Generate Reports</a>
-                                        </div>
                                     </div>
                                     <!--end::Menu item-->
                                 </div>
@@ -178,10 +145,11 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span
-                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">37</span>
+                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">{{ $byWebsiteCount }}</span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Courses</span>
+                                                <span
+                                                    class="text-gray-500 fw-semibold fs-6">{{ __('site.paid_from_website') }}</span>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Stats-->
@@ -216,10 +184,11 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span
-                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">6</span>
+                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">{{ $bankTransforCount }}</span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Certificates</span>
+                                                <span
+                                                    class="text-gray-500 fw-semibold fs-6">{{ __('site.bank_transfer') }}</span>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Stats-->
@@ -253,10 +222,11 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span
-                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">4,7</span>
+                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">{{ $loungeCount }}</span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Avg. Score</span>
+                                                <span
+                                                    class="text-gray-500 fw-semibold fs-6">{{ __('site.lounge') }}</span>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Stats-->
@@ -291,10 +261,11 @@
                                             <div class="m-0">
                                                 <!--begin::Number-->
                                                 <span
-                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">822</span>
+                                                    class="text-gray-700 fw-bolder d-block fs-2qx lh-1 ls-n1 mb-1">{{ $clientCount }}</span>
                                                 <!--end::Number-->
                                                 <!--begin::Desc-->
-                                                <span class="text-gray-500 fw-semibold fs-6">Hours Learned</span>
+                                                <span
+                                                    class="text-gray-500 fw-semibold fs-6">{{ __('site.client') }}</span>
                                                 <!--end::Desc-->
                                             </div>
                                             <!--end::Stats-->

@@ -8,6 +8,7 @@ use App\Http\Controllers\LoungeController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,11 @@ Route::middleware('guest:web')->group(function () {
 /* ====================================== end login ====================================== */
 
 
-Route::middleware('auth:web')->group(
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['auth:web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
     function () {
 
         Route::get('dashboard', [Controller::class, 'home'])->name('dashboard.page');
@@ -68,7 +73,13 @@ Route::middleware('auth:web')->group(
     }
 );
 
-Route::get('/', [OperationController::class, 'homePage'])->name('home');
-Route::get('/lounge-details/{slug}', [OperationController::class, 'loungeDetails'])->name('lounge.details');
-Route::get('/search', [OperationController::class, 'search'])->name('search');
-Route::get('/booking-lounge', [OperationController::class, 'bookingLounge'])->name('booking.lounge');
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function () {
+    Route::get('/', [OperationController::class, 'homePage'])->name('home');
+    Route::get('/lounge-details/{slug}', [OperationController::class, 'loungeDetails'])->name('lounge.details');
+    Route::get('/search', [OperationController::class, 'search'])->name('search');
+    Route::get('/booking-lounge/{slug}', [OperationController::class, 'bookingLounge'])->name('booking.lounge');
+    Route::post('/booking-lounge/{slug}', [OperationController::class, 'booking']);
+});

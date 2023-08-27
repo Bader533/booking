@@ -7,7 +7,8 @@
             <div class="btn btn-icon btn-active-color-primary w-35px h-35px" id="kt_app_sidebar_mobile_toggle">
                 <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
                 <span class="svg-icon svg-icon-2 svg-icon-md-1">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z"
                             fill="currentColor" />
                         <path opacity="0.3"
@@ -36,14 +37,14 @@
                 data-kt-swapper-mode="{default: 'append', lg: 'prepend'}"
                 data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
                 <!--begin::Menu-->
-                <a href="#"
+                <a href="{{ route('dashboard.page') }}"
                     class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0">
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
                         class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
                         <!--begin:Menu link-->
                         <span class="menu-link">
-                            <span class="menu-title">Dashboards</span>
+                            <span class="menu-title">{{ __('site.dashboard') }}</span>
                             <span class="menu-arrow d-lg-none"></span>
                         </span>
                         <!--end:Menu link-->
@@ -165,7 +166,8 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-3 my-0">
-                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark">
+                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode"
+                                data-kt-value="dark">
                                 <span class="menu-icon" data-kt-element="icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen061.svg-->
                                     <span class="svg-icon svg-icon-3">
@@ -193,7 +195,8 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-3 my-0">
-                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="system">
+                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode"
+                                data-kt-value="system">
                                 <span class="menu-icon" data-kt-element="icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen062.svg-->
                                     <span class="svg-icon svg-icon-3">
@@ -220,7 +223,7 @@
                     <div class="cursor-pointer symbol symbol-30px symbol-md-40px"
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                         data-kt-menu-placement="bottom-end">
-                        <img src="{{asset(auth()->user()->getImage())}}" alt="user" />
+                        <img src="{{ asset(auth()->user()->getImage()) }}" alt="user" />
                     </div>
                     <!--begin::User account menu-->
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
@@ -230,16 +233,16 @@
                             <div class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="{{asset(auth()->user()->getImage())}}" />
+                                    <img alt="Logo" src="{{ asset(auth()->user()->getImage()) }}" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bold d-flex align-items-center fs-5">{{auth()->user()->name}}
+                                    <div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }}
                                         <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
                                     </div>
                                     <a href="#"
-                                        class="fw-semibold text-muted text-hover-primary fs-7">{{auth()->user()->email}}</a>
+                                        class="fw-semibold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -250,7 +253,8 @@
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{route('personal.profile')}}" class="menu-link px-5">{{__('site.my_profile')}}</a>
+                            <a href="{{ route('personal.profile') }}"
+                                class="menu-link px-5">{{ __('site.my_profile') }}</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
@@ -259,69 +263,60 @@
                         <!--begin::Menu item-->
                         <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
                             data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
-                            <a href="#" class="menu-link px-5">
-                                <span class="menu-title position-relative">Language
+                            <a class="menu-link px-5">
+                                <span class="menu-title position-relative">{{ __('site.language') }}
                                     <span
-                                        class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-                                        <img class="w-15px h-15px rounded-1 ms-2"
-                                            src="{{asset('assets/media/flags/united-states.svg')}}"
-                                            alt="" /></span></span>
+                                        class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+                                        @if (LaravelLocalization::getCurrentLocaleName() == 'English')
+                                            <img class="w-15px h-15px rounded-1 ms-2"
+                                                src="{{ asset('assets/media/flags/united-states.svg') }}"
+                                                alt="" />
+                                            {{ LaravelLocalization::getCurrentLocaleName() }}
+                                        @elseif(LaravelLocalization::getCurrentLocaleName() == 'Arabic')
+                                            <img class="w-15px h-15px rounded-1 ms-2"
+                                                src="{{ asset('assets/media/flags/palestine.svg') }}"
+                                                alt="" />
+                                            {{ LaravelLocalization::getCurrentLocaleName() }}
+                                        @endif
+                                    </span>
+                                </span>
                             </a>
                             <!--begin::Menu sub-->
                             <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo1/dist/account/settings.html"
-                                        class="menu-link d-flex px-5 active">
-                                        <span class="symbol symbol-20px me-4">
-                                            <img class="rounded-1"
-                                                src="{{asset('assets/media/flags/united-states.svg')}}" alt="" />
-                                        </span>English</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5">
-                                        <span class="symbol symbol-20px me-4">
-                                            <img class="rounded-1" src="{{asset('assets/media/flags/spain.svg')}}"
-                                                alt="" />
-                                        </span>Spanish</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5">
-                                        <span class="symbol symbol-20px me-4">
-                                            <img class="rounded-1" src="{{asset('assets/media/flags/germany.svg')}}"
-                                                alt="" />
-                                        </span>German</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5">
-                                        <span class="symbol symbol-20px me-4">
-                                            <img class="rounded-1" src="{{asset('assets/media/flags/japan.svg')}}"
-                                                alt="" />
-                                        </span>Japanese</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5">
-                                        <span class="symbol symbol-20px me-4">
-                                            <img class="rounded-1" src="{{asset('assets/media/flags/france.svg')}}"
-                                                alt="" />
-                                        </span>French</a>
-                                </div>
-                                <!--end::Menu item-->
+                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <div class="menu-item px-3">
+
+                                        <a rel="alternate" hreflang="{{ $localeCode }}" class="dropdown-item"
+                                            href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            @if ($properties['native'] == 'English')
+                                                <span class="symbol symbol-20px me-4">
+                                                    <img class="rounded-1"
+                                                        src="{{ asset('assets/media/flags/united-states.svg') }}"
+                                                        alt="" />
+                                                    {{ $properties['native'] }}
+
+                                                </span>
+                                            @elseif($properties['native'] == 'العربية')
+                                                <span class="symbol symbol-20px me-4">
+                                                    <img class="rounded-1"
+                                                        src="{{ asset('assets/media/flags/palestine.svg') }}"
+                                                        alt="" />
+                                                    {{ $properties['native'] }}
+
+                                                </span>
+                                            @endif
+                                            {{-- {{ $properties['native'] }} --}}
+
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
                             <!--end::Menu sub-->
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{route('logout')}}" class="menu-link px-5">{{__('site.logout')}}</a>
+                            <a href="{{ route('logout') }}" class="menu-link px-5">{{ __('site.logout') }}</a>
                         </div>
                         <!--end::Menu item-->
                     </div>

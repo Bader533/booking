@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('city');
             $table->string('address');
+            $table->text('short_description');
             $table->text('description');
             $table->string('night');
             $table->string('night_price');

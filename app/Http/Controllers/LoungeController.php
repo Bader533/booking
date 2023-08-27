@@ -24,7 +24,7 @@ class LoungeController extends Controller
      */
     public function create()
     {
-        return view('dashboard.Lounge.create');
+        return view('dashboard.lounge.create');
     }
 
     /**
@@ -35,9 +35,10 @@ class LoungeController extends Controller
         $validator = Validator($request->all(), [
             'name' => 'required | string | min:3 | max:40',
             'city' => 'required | string | min:3 | max:40',
-            'address' => 'required | string | min:3 | max:40',
+            'address' => 'required | string | min:3 | max:150',
+            'short_description' => 'required',
             'description' => 'required',
-            'night' => 'required | numeric',
+            // 'night' => 'required | numeric',
             'night_price' => 'required | numeric',
             'images' => 'required',
         ]);
@@ -85,11 +86,12 @@ class LoungeController extends Controller
         $validator = Validator($request->all(), [
             'name' => 'required | string | min:3 | max:40',
             'city' => 'required | string | min:3 | max:40',
-            'address' => 'required | string | min:3 | max:40',
+            'address' => 'required | string | min:3 | max:150',
+            'short_description' => 'required',
             'description' => 'required',
-            'night' => 'required | numeric',
+            // 'night' => 'required | numeric',
             'night_price' => 'required | numeric',
-            'images' => 'required',
+            'images' => 'nullable',
         ]);
 
         if (!$validator->fails()) {

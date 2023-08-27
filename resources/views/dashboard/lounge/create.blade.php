@@ -106,10 +106,10 @@
                         <div class="card-body pt-0">
                             <!--begin::night-->
                             <!--begin::Label-->
-                            <label class="required form-label">{{ __('site.night') }}</label>
+                            {{-- <label class="required form-label">{{ __('site.night') }}</label> --}}
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input name="night" id="night" class="form-control mb-2" />
+                            {{-- <input name="night" id="night" class="form-control mb-2" /> --}}
                             <!--end::Input-->
                             <!--end::night-->
 
@@ -178,9 +178,21 @@
                                 </div>
                                 <!--end::name , city , address-->
 
-                                <!--begin::description-->
+                                <!--begin::description , short_description-->
                                 <div class="card card-flush py-4">
                                     <br>
+                                    <div class="card-body pt-0">
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label">{{ __('site.short_description') }}</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <input type="text" name="short_description" id="short_description"
+                                                class="form-control mb-2" />
+
+                                            <!--end::Editor-->
+                                        </div>
+                                    </div>
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div>
@@ -196,7 +208,7 @@
                                     </div>
                                     <!--end::Card header-->
                                 </div>
-                                <!--end::description-->
+                                <!--end::description , short_description-->
 
                                 <!--begin::Media-->
                                 <div class="card card-flush py-4">
@@ -318,8 +330,10 @@
             formData.append('name', document.getElementById('name').value);
             formData.append('city', document.getElementById('city').value);
             formData.append('address', document.getElementById('address').value);
-            formData.append('night', document.getElementById('night').value);
+            // formData.append('night', document.getElementById('night').value);
+            formData.append('night', 1);
             formData.append('night_price', document.getElementById('night_price').value);
+            formData.append('short_description', document.getElementById('short_description').value);
 
             var description = document.querySelector('#description .ql-editor').innerHTML;
 

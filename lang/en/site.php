@@ -68,6 +68,7 @@ return [
     'address' => 'Address',
     'night' => 'Night',
     'night_price' => 'Night Price',
+    'short_description' => 'Short Description',
     'description' => 'Description',
     'images' => 'Images',
     'lounge_details' => 'Lounge Details',
@@ -87,4 +88,12 @@ return [
     'dashboard' => 'Dashboard',
 
     'duration_of_stay' => 'Duration Of Stay',
+    'language' => 'Language',
+    'arabic' => 'Arabic',
+    'english' => 'English',
+
+    'search' => 'Search',
+
+    'find_your_next_stay' => 'Find Your Next Stay',
+
 ];

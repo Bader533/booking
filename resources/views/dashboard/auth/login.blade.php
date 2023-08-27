@@ -17,7 +17,7 @@ License: For each use you must have a valid license purchased only from above li
 <head>
     {{--
     <base href="../../../" /> --}}
-    <title>{{__('site.login')}}</title>
+    <title>{{ __('site.login') }}</title>
     <meta charset="utf-8" />
     <meta name="description"
         content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
@@ -31,13 +31,13 @@ License: For each use you must have a valid license purchased only from above li
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="{{asset('assets/media/logos/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="{{asset('assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -46,7 +46,23 @@ License: For each use you must have a valid license purchased only from above li
 <body id="kt_body" class="app-blank bgi-size-cover bgi-position-center bgi-no-repeat">
     <!--begin::Theme mode setup on page load-->
     <script>
-        var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }
+        var defaultThemeMode = "light";
+        var themeMode;
+        if (document.documentElement) {
+            if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
+                themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
+            } else {
+                if (localStorage.getItem("data-bs-theme") !== null) {
+                    themeMode = localStorage.getItem("data-bs-theme");
+                } else {
+                    themeMode = defaultThemeMode;
+                }
+            }
+            if (themeMode === "system") {
+                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-bs-theme", themeMode);
+        }
     </script>
     <!--end::Theme mode setup on page load-->
     <!--begin::Root-->
@@ -70,7 +86,7 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="d-flex flex-center flex-lg-start flex-column">
                     <!--begin::Logo-->
                     <a href="../../demo1/dist/index.html" class="mb-7">
-                        <img alt="Logo" src="{{asset('assets/media/logos/custom-3.svg')}}" />
+                        <img alt="Logo" src="{{ asset('assets/media/logos/custom-3.svg') }}" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
@@ -100,8 +116,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Input group=-->
                                 <div class="fv-row mb-8">
                                     <!--begin::Email-->
-                                    <input type="text" placeholder="Email" name="email" id="email" autocomplete="off"
-                                        class="form-control bg-transparent" />
+                                    <input type="text" placeholder="Email" name="email" id="email"
+                                        autocomplete="off" class="form-control bg-transparent" />
                                     <!--end::Email-->
                                 </div>
                                 <!--end::Input group=-->
@@ -155,33 +171,33 @@ License: For each use you must have a valid license purchased only from above li
         var hostUrl = "assets/";
     </script>
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{asset('assets/js/custom/authentication/sign-in/general.js')}}"></script>
+    <script src="{{ asset('assets/js/custom/authentication/sign-in/general.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script>
         function login() {
-                axios.post('/login', {
-                        email: document.getElementById('email').value,
-                        password: document.getElementById('password').value,
-                    })
-                    .then(function(response) {
-                        //2xx
-                        console.log(response);
-                        // console.log(email);
-                        toastr.success(response.data.message);
-                        window.location.href = '/';
-                    })
-                    .catch(function(error) {
-                        //4xx - 5xx
-                        console.log(error.response.data.message);
-                        toastr.error(error.response.data.message);
+            axios.post('/login', {
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                })
+                .then(function(response) {
+                    //2xx
+                    console.log(response);
+                    // console.log(email);
+                    toastr.success(response.data.message);
+                    window.location.href = '/dashboard';
+                })
+                .catch(function(error) {
+                    //4xx - 5xx
+                    console.log(error.response.data.message);
+                    toastr.error(error.response.data.message);
 
-                    });
-            }//login
+                });
+        } //login
     </script>
     <!--end::Custom Javascript-->
     <!--end::Javascript-->

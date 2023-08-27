@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Client;
 use App\Models\Lounge;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,10 +35,9 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $validator = Validator($request->all(), [
-            'count_night' => 'required | numeric',
-            'price' => 'required | numeric',
+            // 'count_night' => 'required | numeric',
+            // 'price' => 'required | numeric',
             'pay_way' => 'required | numeric',
             'client_id' => 'required | numeric',
             'lounge_id' => 'required | numeric',
@@ -49,9 +49,18 @@ class BookingController extends Controller
 
             $startDate =  $dates[0];
             $endDate =  $dates[1];
-            $bookingData = array_merge($request->all(), [
+            $toDate = Carbon::parse($startDate);
+            $fromDate = Carbon::parse($endDate);
+
+            $days = $toDate->diffInDays($fromDate);
+            $loungePrice = Lounge::where('id', $request->lounge_id)->first('night_price');
+
+            $totalPrice = $days * $loungePrice->night_price;
+            $bookingData = array_merge($request->except('date', 'count_night', 'price'), [
                 'start_date' => $startDate,
                 'end_date' => $endDate,
+                'count_night' => $days,
+                'price' => $totalPrice,
             ]);
 
             $booking = Booking::create($bookingData);
@@ -99,8 +108,8 @@ class BookingController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator($request->all(), [
-            'count_night' => 'required | numeric',
-            'price' => 'required | numeric',
+            // 'count_night' => 'required | numeric',
+            // 'price' => 'required | numeric',
             'pay_way' => 'required | numeric',
             'client_id' => 'required | numeric',
             'lounge_id' => 'required | numeric',
@@ -117,9 +126,19 @@ class BookingController extends Controller
 
             $startDate =  $dates[0];
             $endDate =  $dates[1];
-            $bookingData = array_merge($request->all(), [
+            $toDate = Carbon::parse($startDate);
+            $fromDate = Carbon::parse($endDate);
+
+            $days = $toDate->diffInDays($fromDate);
+            $loungePrice = Lounge::where('id', $request->lounge_id)->first('night_price');
+
+            $totalPrice = $days * $loungePrice->night_price;
+
+            $bookingData = array_merge($request->except('date', 'count_night', 'price'), [
                 'start_date' => $startDate,
                 'end_date' => $endDate,
+                'count_night' => $days,
+                'price' => $totalPrice,
             ]);
 
             $booking->update($bookingData);

@@ -101,13 +101,14 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Actions-->
                                 <div class="d-flex align-items-center gap-2 gap-lg-3">
                                     <!--begin::Secondary button-->
-                                    <a href="#"
+                                    <a href="{{ route('lounge.index') }}"
                                         class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary"
-                                        data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a>
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#kt_modal_create_app">{{ __('site.lounge') }}</a>
                                     <!--end::Secondary button-->
                                     <!--begin::Primary button-->
-                                    <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_new_target">Add Target</a>
+                                    <a href="{{ route('booking.create') }}"
+                                        class="btn btn-sm fw-bold btn-primary">{{ __('site.add_new_booking') }}</a>
                                     <!--end::Primary button-->
                                 </div>
                                 <!--end::Actions-->
@@ -137,11 +138,11 @@ License: For each use you must have a valid license purchased only from above li
         var hostUrl = "assets/";
     </script>
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
-    <script src="{{asset('assets/js/scripts.bundle.js')}}"></script>
+    <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="{{asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>
+    <script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
