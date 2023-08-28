@@ -96,6 +96,42 @@
 @endsection
 @section('header')
     <div class="d-flex flex-column flex-center w-100 min-h-350px px-9" id="header_content">
+
+        @if ($errors->any())
+
+            @foreach ($errors->all() as $error)
+                <!--begin::Alert-->
+                <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
+                    <!--begin::Icon-->
+                    <i class="ki-duotone ki-notification-bing fs-2hx text-danger me-4 mb-5 mb-sm-0"><span
+                            class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                    <!--end::Icon-->
+
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column pe-0 pe-sm-10">
+                        <!--begin::Title-->
+                        <h4 class="fw-semibold">{{ __('site.error') }}</h4>
+                        <!--end::Title-->
+
+                        <!--begin::Content-->
+                        <span>{{ $error }}</span>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+
+                    <!--begin::Close-->
+                    <button type="button"
+                        class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto"
+                        data-bs-dismiss="alert">
+                        <i class="ki-duotone ki-cross fs-1 text-primary"><span class="path1"></span><span
+                                class="path2"></span></i>
+                    </button>
+                    <!--end::Close-->
+                </div>
+                <!--end::Alert-->
+            @endforeach
+
+        @endif
         <!--begin::Heading-->
         <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
             <h1 class="text-white lh-base fw-bold fs-2x fs-lg-3x mb-15">

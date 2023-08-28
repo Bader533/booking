@@ -96,4 +96,8 @@ return [
 
     'find_your_next_stay' => 'Find Your Next Stay',
 
+    'error' => 'خطا !',
+
+    'date_is_booking' => 'الاستراحة فى هذا الموعد محجوز',
+
 ];

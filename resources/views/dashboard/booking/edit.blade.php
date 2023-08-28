@@ -173,7 +173,7 @@
                                             <!--end::Label-->
                                             <input class="form-control form-control-solid input flex"
                                                 placeholder="Pick date rage" id="kt_daterangepicker_1"
-                                                value="{{ $booking->start_date }} - {{ $booking->end_date }}" />
+                                                value="{{ \Carbon\Carbon::parse($booking->start_date)->format('m/d/Y') }} - {{ \Carbon\Carbon::parse($booking->end_date)->format('m/d/Y') }}" />
                                             <!--begin::Datepicker-->
                                             <div id="dateError" class="invalid-feedback"></div>
                                             <!--end::Datepicker-->

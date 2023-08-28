@@ -16,8 +16,8 @@ return new class extends Migration
             $table->integer('count_night');
             $table->integer('price');
             $table->integer('pay_way');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->foreignId('client_id')->constrained();
             $table->foreignId('lounge_id')->constrained();
             $table->timestamps();

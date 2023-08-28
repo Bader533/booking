@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Client;
 use App\Models\Lounge;
+use App\Rules\DateBooking;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,14 +42,14 @@ class BookingController extends Controller
             'pay_way' => 'required | numeric',
             'client_id' => 'required | numeric',
             'lounge_id' => 'required | numeric',
-            'date' => 'required',
+            'date' => ['required', new DateBooking($request->lounge_id, null)],
         ]);
 
         if (!$validator->fails()) {
             $dates = explode(" - ", $request->input('date'));
 
-            $startDate =  $dates[0];
-            $endDate =  $dates[1];
+            $startDate = date("Y-m-d", strtotime($dates[0]));
+            $endDate = date("Y-m-d", strtotime($dates[1]));
             $toDate = Carbon::parse($startDate);
             $fromDate = Carbon::parse($endDate);
 
@@ -113,7 +114,7 @@ class BookingController extends Controller
             'pay_way' => 'required | numeric',
             'client_id' => 'required | numeric',
             'lounge_id' => 'required | numeric',
-            'date' => 'required',
+            'date' => ['required', new DateBooking($request->lounge_id, $id)],
         ]);
 
         if (!$validator->fails()) {
@@ -124,8 +125,8 @@ class BookingController extends Controller
             }
             $dates = explode(" - ", $request->input('date'));
 
-            $startDate =  $dates[0];
-            $endDate =  $dates[1];
+            $startDate = date("Y-m-d", strtotime($dates[0]));
+            $endDate = date("Y-m-d", strtotime($dates[1]));
             $toDate = Carbon::parse($startDate);
             $fromDate = Carbon::parse($endDate);
 

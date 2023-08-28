@@ -23,9 +23,14 @@ class OperationController extends Controller
 
     public function search(Request $request)
     {
+        $validated = $request->validate([
+            'date' => 'required',
+        ]);
+
         $dates = explode(" - ", $request->date);
-        $startDate =  $dates[0];
-        $endDate =  $dates[1];
+
+        $startDate = date("Y-m-d", strtotime($dates[0]));
+        $endDate = date("Y-m-d", strtotime($dates[1]));
 
         $avalibleLounges = Lounge::whereDoesntHave('bookings', function ($query) use ($startDate, $endDate) {
             $query->where(function ($query) use ($startDate, $endDate) {

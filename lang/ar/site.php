@@ -96,4 +96,9 @@ return [
 
     'find_your_next_stay' => 'ابحث عن إقامتك التالية',
 
+
+    'error' => 'Error !',
+
+    'date_is_booking' => 'The Lounge In This Date are Booking',
+
 ];
