@@ -181,7 +181,7 @@
                 <form class="flexbox">
                     @csrf
                     <input class="form-control form-control-solid input flex" placeholder="Pick date rage"
-                        id="kt_daterangepicker_1" name="date" required />
+                        id="kt_daterangepicker_1" name="date" value="{{ $date }}" required />
                     <button type="button" onclick="search()" class="button">{{ __('site.search') }}</button>
                 </form>
             </div>

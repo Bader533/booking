@@ -93,7 +93,8 @@
                                 <th class="min-w-125px">{{ __('site.pay_way') }}</th>
                                 <th class="min-w-125px">{{ __('site.count_night') }}</th>
                                 <th class="min-w-125px">{{ __('site.night_price') }}</th>
-                                <th class="min-w-125px">{{ __('site.created_at') }}</th>
+                                <th class="min-w-125px">{{ __('site.start_date') }}</th>
+                                <th class="min-w-125px">{{ __('site.end_date') }}</th>
                                 <th class="text-end min-w-70px">{{ __('site.actions') }}</th>
                             </tr>
                             <!--end::Table row-->
@@ -141,11 +142,17 @@
                                         <td>{{ $booking->price }}</td>
                                         <!--end::price=-->
 
-                                        <!--begin::created_at=-->
+                                        <!--begin::start_date=-->
                                         <td>
-                                            {{ $booking->created_at->format('n/j/Y') }}
+                                            {{ $booking->start_date }}
                                         </td>
-                                        <!--end::created_at=-->
+                                        <!--end::start_date=-->
+
+                                        <!--begin::end_date=-->
+                                        <td>
+                                            {{ $booking->end_date }}
+                                        </td>
+                                        <!--end::end_date=-->
 
                                         <!--begin::Action=-->
                                         <td class="text-end">

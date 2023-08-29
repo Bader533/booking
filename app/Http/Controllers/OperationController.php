@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Client;
 use App\Models\Lounge;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -55,14 +56,14 @@ class OperationController extends Controller
             'f_name' => 'required | string | min:3 | max:40',
             'l_name' => 'required | string | min:3 | max:40',
             'phone' => 'required | numeric',
-            'nationality' => 'required | string | min:3 | max:40',
+            'nationality' => 'required | string | min:3 | max:100',
             'client_kind' => 'required | string | min:3 | max:40',
             'id_kind' => 'required | string | min:3 | max:40',
             'id_copy' => 'required | string | min:3 | max:40',
             'visa_number' => 'required | numeric',
-            'sign_in' => 'required | date',
-            'entry_time' => 'required',
-            'duration' => 'required | numeric',
+            // 'sign_in' => 'required | date',
+            // 'entry_time' => 'required',
+            // 'duration' => 'required | numeric',
             'arrival_destination' => 'required | string | min:3 | max:40',
         ]);
 
@@ -73,20 +74,33 @@ class OperationController extends Controller
             if ($lounge == null) {
                 return view('error-404');
             }
-            // dd($request->except(['date', 'lounge_id']));
-            $client = Client::create($request->except(['date', 'lounge_id']));
-            // dd('done');
+            $dates = explode(" - ", $request->input('date'));
+
+            $startDate = date("Y-m-d", strtotime($dates[0]));
+            $endDate = date("Y-m-d", strtotime($dates[1]));
+
+            $toDate = Carbon::parse($startDate);
+            $fromDate = Carbon::parse($endDate);
+
+            $days = $toDate->diffInDays($fromDate);
+
+
+            $clientData = array_merge($request->except('date', 'lounge_id'), [
+                'sign_in' => $startDate,
+                'entry_time' => Carbon::now()->toTimeString(),
+                'duration' => $days,
+
+            ]);
+
+            $lounge = Lounge::where('id', $request->lounge_id)->first('night_price');
+
+            $client = Client::create($clientData);
+
             if ($client) {
-                $dates = explode(" - ", $request->input('date'));
 
-                $startDate =  $dates[0];
-                $endDate =  $dates[1];
-
-
-                // $number_of_nights = $startDate->diffInDays($endDate) - 1;
                 $booking = Booking::create([
-                    'count_night' => 5,
-                    'price' => 100,
+                    'count_night' => $days,
+                    'price' => $days *  $lounge->night_price,
                     'pay_way' => 1,
                     'client_id' => $client->id,
                     'lounge_id' => $request->lounge_id,
