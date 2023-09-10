@@ -72,6 +72,7 @@ return [
     'lounge_details' => 'تفاصيل الاستراحة',
 
     'booking' => 'الحجز',
+    'bookings' => 'الحجوزات',
     'booking_details' => 'تفاصيل الحجز',
     'count_night' => 'عدد الليالى',
     'price' => 'السعر',
@@ -113,6 +114,22 @@ return [
 
     'start_date' => 'تاريخ البدء',
     'end_date' => 'تاريخ الانتهاء',
+
+    'invoice' => 'الفاتورة',
+
+    'booking_done_successfully' => 'تم حجز بنجاح',
+    'booking_date' => 'تاريخ الحجز',
+    'booking_price' => 'مبلغ الحجز',
+    'booking_number' => 'رقم الحجز',
+
+    'client_details' => 'تفاصيل العميل',
+
+    'date_booking' => 'موعد الحجز',
+
+    'price_based_date' => 'السعر بناء على الموعد',
+
+    'days' => 'ايام',
+
 
     ///////////////////////////////////////////
     'afghanistan' => 'أفغانستان',

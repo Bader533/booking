@@ -18,8 +18,19 @@ class OperationController extends Controller
 
     public function loungeDetails(Request $request, $slug)
     {
+        // dd($request->date);
         $lounge = Lounge::where('slug', $slug)->first();
-        return view('frontend.lounge-details', ['lounge' => $lounge, 'date' => $request->date]);
+
+        $dates = explode(" - ", $request->date);
+
+        $startDate = date("Y-m-d", strtotime($dates[0]));
+        $endDate = date("Y-m-d", strtotime($dates[1]));
+        $toDate = Carbon::parse($startDate);
+        $fromDate = Carbon::parse($endDate);
+
+        $days = $toDate->diffInDays($fromDate);
+
+        return view('frontend.lounge-details', ['lounge' => $lounge, 'date' => $request->date, 'days' => $days]);
     }
 
     public function search(Request $request)
@@ -42,7 +53,16 @@ class OperationController extends Controller
                 });
         })->get();
 
-        return view('frontend.lounges', ['avalibleLounges' => $avalibleLounges, 'date' => $request->date]);
+        $toDate = Carbon::parse($startDate);
+        $fromDate = Carbon::parse($endDate);
+
+        $days = $toDate->diffInDays($fromDate);
+
+        return view('frontend.lounges', [
+            'avalibleLounges' => $avalibleLounges,
+            'date' => $request->date,
+            'days' => $days
+        ]);
     }
 
     public function bookingLounge(Request $request)
@@ -60,13 +80,13 @@ class OperationController extends Controller
             'phone' => 'required | numeric',
             'nationality' => 'required | string | min:3 | max:100',
             'client_kind' => 'required | string | min:3 | max:40',
-            'id_kind' => 'required | string | min:3 | max:40',
-            'id_copy' => 'required | string | min:3 | max:40',
-            'visa_number' => 'required | numeric',
+            // 'id_kind' => 'required | string | min:3 | max:40',
+            // 'id_copy' => 'required | string | min:3 | max:40',
+            // 'visa_number' => 'required | numeric',
             // 'sign_in' => 'required | date',
             // 'entry_time' => 'required',
             // 'duration' => 'required | numeric',
-            'arrival_destination' => 'required | string | min:3 | max:40',
+            // 'arrival_destination' => 'required | string | min:3 | max:40',
         ]);
 
 
@@ -99,8 +119,9 @@ class OperationController extends Controller
             $client = Client::create($clientData);
 
             if ($client) {
-
+                $serialNumber = random_int(100000000, 999999999);
                 $booking = Booking::create([
+                    'booking_number' => $serialNumber,
                     'count_night' => $days,
                     'price' => $days *  $lounge->night_price,
                     'pay_way' => 1,
@@ -112,9 +133,24 @@ class OperationController extends Controller
             }
 
 
-            return response()->json(['message' => $client ? __('site.saved_successfully') : __('site.failed_to_save')], $client ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+            return response()->json(
+                [
+                    'message' => $client ? __('site.saved_successfully') : __('site.failed_to_save'),
+                    'booking' => $client ? $booking->slug : null
+                ],
+                $client ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST
+            );
         } else {
             return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
         }
+    }
+
+    public function invoice($slug)
+    {
+        $booking = Booking::with('client', 'lounge')->where('slug', $slug)->first();
+        if ($booking == null) {
+            return view('error-404');
+        }
+        return view('frontend.invoice', ['booking' => $booking]);
     }
 }

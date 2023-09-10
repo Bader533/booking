@@ -173,7 +173,7 @@
                         <!--end::Step 1-->
 
                         <!--begin::Step 2-->
-                        <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                        {{-- <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav" data-kt-stepper-action="step">
                             <!--begin::Wrapper-->
                             <div class="stepper-wrapper d-flex align-items-center">
                                 <!--begin::Icon-->
@@ -200,7 +200,7 @@
                             <!--begin::Line-->
                             <div class="stepper-line h-40px"></div>
                             <!--end::Line-->
-                        </div>
+                        </div> --}}
                         <!--end::Step 2-->
 
                         <!--begin::Step 3-->
@@ -580,7 +580,7 @@
                             <!--begin::Step 1-->
 
                             <!--begin::Step 2-->
-                            <div class="flex-column" data-kt-stepper-element="content">
+                            {{-- <div class="flex-column" data-kt-stepper-element="content">
                                 <!--begin::id_kind-->
                                 <div class="fv-row mb-10">
                                     <!--begin::Label-->
@@ -637,7 +637,7 @@
                                     <!--end::Input-->
                                 </div>
                                 <!--end::arrival_destination-->
-                            </div>
+                            </div> --}}
                             <!--begin::Step 2-->
 
                             <!--begin::Step 3-->
@@ -729,7 +729,7 @@
                             <!--begin::Wrapper-->
                             <div>
                                 <button type="button" class="btn btn-primary" onclick="bookingLounge()"
-                                    data-kt-stepper-action="submit">
+                                    {{-- data-kt-stepper-action="submit" --}}>
                                     <span class="indicator-label">
                                         Submit
                                     </span>
@@ -739,9 +739,9 @@
                                     </span>
                                 </button>
 
-                                <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
+                                {{-- <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
                                     Continue
-                                </button>
+                                </button> --}}
                             </div>
                             <!--end::Wrapper-->
                         </div>
@@ -769,15 +769,15 @@
                     client_kind: document.getElementById('client_kind').value,
                     phone: document.getElementById('phone').value,
                     nationality: document.getElementById('nationality').value,
-                    id_kind: document.getElementById('id_kind').value,
-                    id_copy: document.getElementById('id_copy').value,
-                    visa_number: document.getElementById('visa_number').value,
-                    arrival_destination: document.getElementById('arrival_destination').value,
+                    // id_kind: document.getElementById('id_kind').value,
+                    // id_copy: document.getElementById('id_copy').value,
+                    // visa_number: document.getElementById('visa_number').value,
+                    // arrival_destination: document.getElementById('arrival_destination').value,
                 })
                 .then(function(response) {
                     toastr.success(response.data.message);
-                    // window.location.href = '/';
-                    location.reload();
+                    window.location.href = '/invoice/' + response.data.booking;
+                    // location.reload();
                 }).catch(function(error) {
                     console.log(error);
                     toastr.error(error.response.data.message)

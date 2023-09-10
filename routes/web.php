@@ -65,6 +65,8 @@ Route::group(
         /* ====================================== booking ====================================== */
         Route::resource('booking', BookingController::class);
         Route::get('search/booking', [BookingController::class, 'search'])->name('booking.search');
+        Route::get('paid/booking', [BookingController::class, 'indexBookingPaid'])->name('booking.paid');
+        Route::get('bank-transfer/booking', [BookingController::class, 'indexBookingTransfer'])->name('booking.transfer');
         /* ====================================== end booking ====================================== */
 
         /* ====================================== logout ====================================== */
@@ -82,4 +84,5 @@ Route::group([
     Route::get('/search', [OperationController::class, 'search'])->name('search');
     Route::get('/booking-lounge/{slug}', [OperationController::class, 'bookingLounge'])->name('booking.lounge');
     Route::post('/booking-lounge/{slug}', [OperationController::class, 'booking']);
+    Route::get('/invoice/{slug}', [OperationController::class, 'invoice'])->name('frontend.invoice');
 });

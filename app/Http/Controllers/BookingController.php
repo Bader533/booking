@@ -46,6 +46,8 @@ class BookingController extends Controller
         ]);
 
         if (!$validator->fails()) {
+            $serialNumber = random_int(100000000, 999999999);
+
             $dates = explode(" - ", $request->input('date'));
 
             $startDate = date("Y-m-d", strtotime($dates[0]));
@@ -58,6 +60,7 @@ class BookingController extends Controller
 
             $totalPrice = $days * $loungePrice->night_price;
             $bookingData = array_merge($request->except('date', 'count_night', 'price'), [
+                'booking_number' => $serialNumber,
                 'start_date' => $startDate,
                 'end_date' => $endDate,
                 'count_night' => $days,
@@ -79,7 +82,7 @@ class BookingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Booking $booking)
+    public function show($id)
     {
         //
     }
@@ -174,7 +177,8 @@ class BookingController extends Controller
             $bookings = Booking::whereHas('client', function ($queries) use ($query) {
                 $queries->where('f_name', 'like', '%' . $query . '%')
                     ->orWhere('l_name', 'like', '%' . $query . '%')
-                    ->orWhere('phone', 'like', '%' . $query . '%');
+                    ->orWhere('phone', 'like', '%' . $query . '%')
+                    ->orWhere('booking_number', 'like', '%' . $query . '%');
             })->orderBy('id', 'desc')->get();
         } else {
 
@@ -185,12 +189,25 @@ class BookingController extends Controller
                         $queries->whereHas('client', function ($queries) use ($query) {
                             $queries->where('f_name', 'like', '%' . $query . '%')
                                 ->orWhere('l_name', 'like', '%' . $query . '%')
-                                ->orWhere('phone', 'like', '%' . $query . '%');
+                                ->orWhere('phone', 'like', '%' . $query . '%')
+                                ->orWhere('booking_number', 'like', '%' . $query . '%');
                         });
                     });
             })->orderBy('id', 'desc')->get();
         }
 
         return view('dashboard.booking.search', ['bookings' => $bookings]);
+    }
+
+    public function indexBookingPaid()
+    {
+        $bookings = Booking::with('client:id,f_name,l_name', 'lounge:id,name')->where('pay_way', 1)->paginate(10);
+        return view('dashboard.booking.paid', ['bookings' => $bookings]);
+    }
+
+    public function indexBookingTransfer()
+    {
+        $bookings = Booking::with('client:id,f_name,l_name', 'lounge:id,name')->where('pay_way', 0)->paginate(10);
+        return view('dashboard.booking.transfer', ['bookings' => $bookings]);
     }
 }

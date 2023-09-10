@@ -59,9 +59,19 @@ class LoungeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Lounge $lounge)
+    public function show($slug)
     {
-        //
+        $lounge = Lounge::with('bookings')->where('slug', $slug)->first();
+
+        if ($lounge == null) {
+            return view('error-404');
+        }
+        $bookings = $lounge->bookings()->paginate(5);
+
+        return view('dashboard.lounge.show', [
+            'lounge' => $lounge,
+            'bookings' => $bookings
+        ]);
     }
 
     /**

@@ -74,6 +74,7 @@ return [
     'lounge_details' => 'Lounge Details',
 
     'booking' => 'Booking',
+    'bookings' => 'Bookings',
     'booking_details' => 'Booking Details',
     'count_night' => 'Count Night',
     'price' => 'Price',
@@ -112,6 +113,22 @@ return [
     'start_date' => 'Start Date',
     'end_date' => 'End Date',
 
+    'invoice' => 'Invoice',
+
+    'booking_done_successfully' => 'Successfully Booked',
+    'booking_date' => 'Booking Date',
+    'booking_price' => 'Booking Price',
+    'booking_number' => 'Booking Number',
+
+    'client_details' => 'Client Details',
+
+    'booking_number' => 'Booking Number',
+
+    'date_booking' => 'Booking Date',
+
+    'price_based_date' => 'Price Based On Date',
+
+    'days' => 'Days',
 
     //////////////////////////////////////////////
     'afghanistan' => 'Afghanistan',

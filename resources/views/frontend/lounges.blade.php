@@ -223,6 +223,14 @@
                                             </p>
                                             {{-- </div> --}}
                                         </div>
+
+                                        <div class="row" style="background: #ebeded;">
+                                            {{-- <div class="col-md-6"> --}}
+                                            <p class="card-text">
+                                                {{ __('site.price_based_date') }} : ${{ $lounge->night_price * $days }}
+                                            </p>
+                                            {{-- </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

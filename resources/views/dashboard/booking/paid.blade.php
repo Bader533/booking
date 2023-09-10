@@ -7,7 +7,7 @@
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-            {{ __('site.lounge') }}</h1>
+            {{ __('site.paid_from_website') }}</h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -22,7 +22,15 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">{{ __('site.lounge') }}</li>
+            <li class="breadcrumb-item text-muted">{{ __('site.booking') }}</li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item">
+                <span class="bullet bg-gray-400 w-5px h-2px"></span>
+            </li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item text-muted">{{ __('site.paid_from_website') }}</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -55,21 +63,27 @@
                             <!--end::Svg Icon-->
                             <input type="text" data-kt-customer-table-filter="search"
                                 class="form-control form-control-solid w-250px ps-15"
-                                placeholder="{{ __('site.search_lounge') }}" id="search_lounges" />
+                                placeholder="{{ __('site.search_booking') }}" id="search_bookings" />
                         </div>
                         <!--end::Search-->
                     </div>
                     <!--begin::Card title-->
                     <!--begin::Card toolbar-->
-                    <div class="card-toolbar">
-                        <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <!--begin::Add customer-->
-                            <a href="{{ route('lounge.create') }}"
-                                class="btn btn-primary">{{ __('site.add_new_lounge') }}</a>
-                            <!--end::Add customer-->
+                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                        <div class="w-100 mw-150px">
+                            <!--begin::Select2-->
+                            {{-- <select class="form-select form-select-solid" data-control="select2" id="searchType"
+                                data-placeholder="{{ __('site.pay_way') }}">
+                                <option></option>
+                                <option value="null">All</option>
+                                <option value="1">{{ __('site.paid_from_website') }}</option>
+                                <option value="0">{{ __('site.bank_transfer') }}</option>
+                            </select> --}}
+                            <!--end::Select2-->
                         </div>
-                        <!--end::Toolbar-->
+                        <!--begin::Add product-->
+                        <a href="{{ route('booking.create') }}" class="btn btn-primary">{{ __('site.add_new_booking') }}</a>
+                        <!--end::Add product-->
                     </div>
                     <!--end::Card toolbar-->
                 </div>
@@ -83,55 +97,83 @@
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-125px">{{ __('site.name') }}</th>
-                                <th class="min-w-125px">{{ __('site.city') }}</th>
-                                <th class="min-w-125px">{{ __('site.address') }}</th>
-                                <th class="min-w-125px">{{ __('site.night') }}</th>
+                                <th class="min-w-125px">{{ __('site.lounge') }}</th>
+                                <th class="min-w-125px">{{ __('site.booking_number') }}</th>
+                                <th class="min-w-125px">{{ __('site.pay_way') }}</th>
+                                <th class="min-w-125px">{{ __('site.count_night') }}</th>
                                 <th class="min-w-125px">{{ __('site.night_price') }}</th>
+                                <th class="min-w-125px">{{ __('site.start_date') }}</th>
+                                <th class="min-w-125px">{{ __('site.end_date') }}</th>
                                 <th class="text-end min-w-70px">{{ __('site.actions') }}</th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
                         <!--end::Table head-->
                         <!--begin::Table body-->
-                        <tbody class="fw-semibold text-gray-600" id="lounge_table">
-                            @if (!$lounges->isEmpty())
-                                @foreach ($lounges as $lounge)
+                        <tbody class="fw-semibold text-gray-600" id="booking_table">
+                            @if (!$bookings->isEmpty())
+                                @foreach ($bookings as $booking)
                                     <tr>
                                         <!--begin::First Name=-->
                                         <td>
-                                            <a href="{{ route('lounge.show', $lounge->slug) }}"
-                                                class="text-gray-800 text-hover-primary mb-1">{{ $lounge->name }}</a>
+                                            <a class="text-gray-800 text-hover-primary mb-1">
+                                                {{ $booking->client->f_name . ' ' . $booking->client->l_name }}</a>
                                         </td>
                                         <!--end::First Name=-->
 
                                         <!--begin::Family Name=-->
                                         <td>
-                                            <a href="#"
-                                                class="text-gray-800 text-hover-primary mb-1">{{ $lounge->city }}</a>
+                                            <a
+                                                class="text-gray-800 text-hover-primary mb-1">{{ $booking->lounge->name }}</a>
                                         </td>
                                         <!--end::Family Name=-->
 
-                                        <!--begin::phone=-->
+                                        <!--begin::Family Name=-->
                                         <td>
-                                            <a href="#"
-                                                class="text-gray-600 text-hover-primary mb-1">{{ $lounge->address }}</a>
+                                            <a
+                                                class="text-gray-800 text-hover-primary mb-1">{{ $booking->booking_number }}</a>
                                         </td>
-                                        <!--end::phone=-->
+                                        <!--end::Family Name=-->
 
-                                        <!--begin::nationality=-->
-                                        <td>{{ $lounge->night }}</td>
-                                        <!--end::nationality=-->
-
-                                        <!--begin::visa_number=-->
+                                        <!--begin::pay way=-->
                                         <td>
-                                            {{ $lounge->night_price }}
+                                            @if ($booking->pay_way == 1)
+                                                <span
+                                                    class="badge py-3 px-4 fs-7 badge-light-primary">{{ __('site.paid_from_website') }}</span>
+                                            @else
+                                                <span
+                                                    class="badge py-3 px-4 fs-7 badge-light-warning">{{ __('site.bank_transfer') }}</span>
+                                            @endif
                                         </td>
-                                        <!--end::visa_number=-->
+                                        <!--end::pay way=-->
+
+                                        <!--begin::count_night=-->
+                                        <td>
+                                            <a
+                                                class="text-gray-600 text-hover-primary mb-1">{{ $booking->count_night }}</a>
+                                        </td>
+                                        <!--end::count_night=-->
+
+                                        <!--begin::price=-->
+                                        <td>{{ $booking->price }}</td>
+                                        <!--end::price=-->
+
+                                        <!--begin::start_date=-->
+                                        <td>
+                                            {{ $booking->start_date }}
+                                        </td>
+                                        <!--end::start_date=-->
+
+                                        <!--begin::end_date=-->
+                                        <td>
+                                            {{ $booking->end_date }}
+                                        </td>
+                                        <!--end::end_date=-->
 
                                         <!--begin::Action=-->
                                         <td class="text-end">
                                             <!--begin::Edit-->
-                                            <a href="{{ route('lounge.edit', $lounge->slug) }}"
+                                            <a href="{{ route('booking.edit', $booking->id) }}"
                                                 class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
                                                 data-bs-target="#kt_modal_update_address">
                                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover"
@@ -158,11 +200,11 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="6" align="center">{{ __('site.no_data_found') }}</td>
+                                    <td colspan="7" align="center">{{ __('site.no_data_found') }}</td>
                                 </tr>
                             @endif
                         </tbody>
-                        <tbody class="fw-semibold text-gray-600" id="lounge_table_2">
+                        <tbody class="fw-semibold text-gray-600" id="booking_table_2">
                         </tbody>
                         <!--end::Table body-->
                     </table>
@@ -173,7 +215,7 @@
                                 class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                                 <div class="dataTables_paginate paging_simple_numbers"
                                     id="kt_ecommerce_products_table_paginate">
-                                    {{ $lounges->links('pagination::bootstrap-4') }}
+                                    {{ $bookings->links('pagination::bootstrap-4') }}
                                 </div>
                             </div>
                         </div>
@@ -189,30 +231,40 @@
 
 @section('js')
     <script>
-        $('#search_lounges').on('keyup', function() {
+        // $('#searchType').select2();
+        // $('#searchType').on('select2:select', handleSearch);
+        // const searchPayWay = document.querySelector('#searchType');
+        const searchBooking = document.querySelector('#search_bookings');
 
-            $value = $(this).val();
+        // $(searchPayWay).select2();
 
-            if ($value) {
-                $('#lounge_table').hide();
-                $('#lounge_table_2').show();
+        // Event listener for input change
+        // searchPayWay.addEventListener('change', handleSearch);
+        searchBooking.addEventListener('input', handleSearch);
 
-                $.ajax({
-                    type: 'get',
-                    url: "{{ route('lounge.search') }}",
-                    data: {
-                        'search': $value
-                    },
-                    success: function(data) {
-                        $('#lounge_table_2').html(data);
+        function handleSearch() {
+            const payWay = 1;
+            const query = searchBooking.value;
 
-                    },
-                });
+            if (payWay || query) {
+                $('#booking_table').hide();
+                $('#booking_table_2').show();
+
+                axios.get(`/search/booking?pay_way=${payWay}&query=${query}`)
+                    .then(function(response) {
+                        $('#booking_table_2').html(response.data);
+                        // Handle the response data
+                        // console.log(response.data);
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                    });
+
             } else {
-                $('#lounge_table').show();
-                $('#lounge_table_2').hide();
+                $('#booking_table').show();
+                $('#booking_table_2').hide();
             }
 
-        }); //end live search
+        } //end live search
     </script>
 @endsection

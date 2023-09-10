@@ -81,7 +81,7 @@
                 </div>
                 <!--end::Card header-->
                 <!--begin::Card body-->
-                <div class="card-body pt-0">
+                <div class="table-responsive card-body pt-0">
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                         <!--begin::Table head-->
@@ -90,6 +90,7 @@
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-125px">{{ __('site.name') }}</th>
                                 <th class="min-w-125px">{{ __('site.lounge') }}</th>
+                                <th class="min-w-125px">{{ __('site.booking_number') }}</th>
                                 <th class="min-w-125px">{{ __('site.pay_way') }}</th>
                                 <th class="min-w-125px">{{ __('site.count_night') }}</th>
                                 <th class="min-w-125px">{{ __('site.night_price') }}</th>
@@ -107,15 +108,22 @@
                                     <tr>
                                         <!--begin::First Name=-->
                                         <td>
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">
+                                            <a class="text-gray-800 text-hover-primary mb-1">
                                                 {{ $booking->client->f_name . ' ' . $booking->client->l_name }}</a>
                                         </td>
                                         <!--end::First Name=-->
 
                                         <!--begin::Family Name=-->
                                         <td>
-                                            <a href="#"
+                                            <a
                                                 class="text-gray-800 text-hover-primary mb-1">{{ $booking->lounge->name }}</a>
+                                        </td>
+                                        <!--end::Family Name=-->
+
+                                        <!--begin::Family Name=-->
+                                        <td>
+                                            <a
+                                                class="text-gray-800 text-hover-primary mb-1">{{ $booking->booking_number }}</a>
                                         </td>
                                         <!--end::Family Name=-->
 
@@ -133,7 +141,7 @@
 
                                         <!--begin::count_night=-->
                                         <td>
-                                            <a href="#"
+                                            <a
                                                 class="text-gray-600 text-hover-primary mb-1">{{ $booking->count_night }}</a>
                                         </td>
                                         <!--end::count_night=-->
@@ -193,6 +201,17 @@
                         <!--end::Table body-->
                     </table>
                     <!--end::Table-->
+                    <div class="container">
+                        <div class="row">
+                            <div
+                                class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                                <div class="dataTables_paginate paging_simple_numbers"
+                                    id="kt_ecommerce_products_table_paginate">
+                                    {{ $bookings->links('pagination::bootstrap-4') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!--end::Card body-->
             </div>

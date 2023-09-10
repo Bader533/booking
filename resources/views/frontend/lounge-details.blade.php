@@ -75,10 +75,10 @@
         }
 
         /* .image-item {
-                                                        width: 100%;
-                                                        height: 100%;
-                                                        object-fit: cover;
-                                                    } */
+                                                                                                width: 100%;
+                                                                                                height: 100%;
+                                                                                                object-fit: cover;
+                                                                                            } */
         /* @media (min-width: 800px) { */
         @media screen and (min-width: 768px) {
 
@@ -181,6 +181,12 @@
                 <div class="col">
                     <div class="row"
                         style="background-color: #EBEDED;padding: 10px;margin: 0px 10px;border-radius: 5px;">
+
+                        <p style="direction: rtl;font-size: 18px;"><b>{{ __('site.price_based_date') }} :</b>
+                            {{ $days * $lounge->night_price }}$</p>
+
+                        <p style="direction: rtl;font-size: 18px;"><b>{{ __('site.count_night') }} :</b>
+                            {{ $days }} {{ __('site.days') }}</p>
                         <a href="{{ route('booking.lounge', $lounge->slug) }}?date={{ $date }}"
                             class="btn btn-primary"
                             style="padding: 5px 25px;background-color: #50CD89">{{ __('site.booking') }}</a>

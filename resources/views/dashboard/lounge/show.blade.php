@@ -7,7 +7,7 @@
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-            {{ __('site.client') }}</h1>
+            {{ __('site.lounge') }}</h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -22,7 +22,15 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">{{ __('site.client') }}</li>
+            <li class="breadcrumb-item text-muted">{{ __('site.lounge') }}</li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item">
+                <span class="bullet bg-gray-400 w-5px h-2px"></span>
+            </li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item text-muted">{{ $lounge->name }}</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -49,10 +57,10 @@
                                 </div> --}}
                                 <!--end::Avatar-->
                                 <!--begin::Name-->
-                                <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">{{ $client->name }}</a>
+                                <a class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1">{{ $lounge->name }}</a>
                                 <!--end::Name-->
                                 <!--begin::Position-->
-                                <div class="fs-5 fw-semibold text-muted mb-6">{{ __('site.client') }}</div>
+                                <div class="fs-5 fw-semibold text-muted mb-6">{{ __('site.lounge') }}</div>
                                 <!--end::Position-->
                             </div>
                             <!--end::Summary-->
@@ -60,7 +68,7 @@
                             <div class="d-flex flex-stack fs-4 py-3">
                                 <div class="fw-bold rotate collapsible" data-bs-toggle="collapse"
                                     href="#kt_customer_view_details" role="button" aria-expanded="false"
-                                    aria-controls="kt_customer_view_details">{{ __('site.client_details') }}
+                                    aria-controls="kt_customer_view_details">{{ __('site.lounge_details') }}
                                     <span class="ms-2 rotate-180">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                         <span class="svg-icon svg-icon-3">
@@ -76,7 +84,7 @@
                                 </div>
 
                                 <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="{{ __('site.edit') }}">
-                                    <a href="{{ route('client.edit', $client->slug) }}"
+                                    <a href="{{ route('lounge.edit', $lounge->slug) }}"
                                         class="btn btn-sm btn-light-primary">{{ __('site.edit') }}</a>
                                 </span>
 
@@ -87,16 +95,16 @@
                             <div id="kt_customer_view_details" class="collapse show">
                                 <div class="py-5 fs-6">
                                     <div class="fw-bold mt-5">{{ __('site.name') }}</div>
-                                    <div class="text-gray-600">{{ $client->f_name }} {{ $client->l_name }}</div>
+                                    <div class="text-gray-600">{{ $lounge->name }}</div>
 
-                                    <div class="fw-bold mt-5">{{ __('site.email') }}</div>
-                                    <div class="text-gray-600">{{ $client->phone }}</div>
+                                    <div class="fw-bold mt-5">{{ __('site.city') }}</div>
+                                    <div class="text-gray-600">{{ $lounge->city }}</div>
 
-                                    <div class="fw-bold mt-5">{{ __('site.nationality') }}</div>
-                                    <div class="text-gray-600">{{ $client->nationality }}</div>
+                                    <div class="fw-bold mt-5">{{ __('site.address') }}</div>
+                                    <div class="text-gray-600">{{ $lounge->address }}</div>
 
-                                    <div class="fw-bold mt-5">{{ __('site.client_kind') }}</div>
-                                    <div class="text-gray-600">{{ $client->client_kind }}</div>
+                                    <div class="fw-bold mt-5">{{ __('site.night_price') }}</div>
+                                    <div class="text-gray-600">{{ $lounge->night_price }}</div>
                                     <!--begin::Details item-->
 
                                 </div>
@@ -142,14 +150,14 @@
                                 </div>
                                 <!--end::Card header-->
                                 <!--begin::Card body-->
-                                <div class="card-body pt-0">
+                                <div class="table-responsive card-body pt-0">
                                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                                         <!--begin::Table head-->
                                         <thead>
                                             <!--begin::Table row-->
                                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                                 <th>{{ __('site.booking_number') }}</th>
-                                                <th>{{ __('site.lounge') }}</th>
+                                                <th>{{ __('site.client') }}</th>
                                                 <th>{{ __('site.count_night') }}</th>
                                                 <th>{{ __('site.price') }}</th>
                                                 <th>{{ __('site.pay_way') }}</th>
@@ -173,9 +181,11 @@
 
                                                         <!--begin::lounge =-->
                                                         <td>
-                                                            <p class="text-gray-800 text-hover-primary mb-1">
-                                                                {{ $booking->lounge->name }}
-                                                            </p>
+                                                            <a href="{{ route('client.show', $booking->client->slug) }}"
+                                                                class="text-gray-800 text-hover-primary mb-1">
+                                                                {{ $booking->client->f_name }}
+                                                                {{ $booking->client->l_name }}
+                                                            </a>
                                                         </td>
                                                         <!--end::lounge =-->
 
