@@ -209,8 +209,8 @@
         function search() {
             date = '{{ $date }}';
             slug = '{{ $lounge->slug }}';
-            let newUrl = `/booking-lounge?slug=${slug}&date=${date}`;
-            window.location.href = newUrl;
+                let newUrl = `/booking-lounge?slug=${slug}&date=${date}`;
+                window.location.href = newUrl;
         }
     </script>
 @endsection
